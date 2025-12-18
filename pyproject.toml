@@ -1,1 +1,31 @@
-# Please list the required python packages.
+
+[build-system]
+requires = ["setuptools>=65", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "snarl-optimizer"
+version = "0.1.0"
+description = "Signal-to-Noise Adaptive Learning Rate (SNARL) - Optimizer Research"
+requires-python = ">=3.10"
+dependencies = [
+    "torch>=2.0.0",
+    "torchvision>=0.15.0",
+    "hydra-core>=1.3.0",
+    "omegaconf>=2.3.0",
+    "wandb>=0.15.0",
+    "optuna>=3.0.0",
+    "numpy>=1.24.0",
+    "pandas>=2.0.0",
+    "matplotlib>=3.7.0",
+    "seaborn>=0.12.0",
+    "scikit-learn>=1.3.0",
+    "tqdm>=4.65.0",
+    "tensorboard>=2.13.0",
+    "PyYAML>=6.0",
+    "transformers>=4.30.0",
+    "datasets>=2.10.0",
+]
+
+[tool.uv]
+allow-direct-imports = true

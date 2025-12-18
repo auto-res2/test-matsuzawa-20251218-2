@@ -1,0 +1,67 @@
+run_id: comparative-1-resnet20-cifar10
+method: RAdam-Baseline
+description: Rectified Adam baseline optimizer using global variance rectification heuristic
+model:
+  name: ResNet-20
+  architecture: ResNet
+  depth: 20
+  num_classes: 10
+dataset:
+  name: CIFAR-10
+  split:
+    train: 0.9
+    val: 0.1
+  preprocessing:
+    normalization: standard_cifar10
+    augmentation: true
+    pad: 4
+    crop_size: 32
+training:
+  learning_rate: 0.1
+  batch_size: 128
+  epochs: 200
+  optimizer: RAdam
+  weight_decay: 0.0
+  gradient_clip: null
+  scheduler: cosine
+  seed: 42
+  additional_params:
+    betas: [0.9, 0.999]
+    eps: 1e-8
+evaluation:
+  primary_metric: early_convergence_speed
+  target_performance_percentage: 0.95
+  secondary_metrics:
+    - final_performance
+    - per_layer_snr_evolution
+    - training_efficiency
+    - convergence_stability
+optuna:
+  enabled: true
+  n_trials: 20
+  sampler: TPESampler
+  search_spaces:
+    - param_name: learning_rate
+      distribution_type: loguniform
+      low: 0.01
+      high: 0.5
+      choices: null
+    - param_name: weight_decay
+      distribution_type: loguniform
+      low: 1e-05
+      high: 0.001
+      choices: null
+experimental_notes: |
+  RAdam (Rectified Adam) is the primary baseline for comparison. It uses a global
+  variance rectification term based on a fixed heuristic (ρt > 4) to determine whether
+  to use adaptive learning rates or momentum-only updates. This global decision applies
+  uniformly across all layers.
+  
+  Expected performance:
+  - Convergence to 95% of final performance at ~epoch 28 (baseline for comparison)
+  - Final accuracy ~92.0% ± 0.3%
+  - Slower early-stage convergence due to momentum-only phase before ρt > 4
+  - Stable late-stage training with variance rectification
+  
+  Comparison point: SNARL should demonstrate 35-40% faster convergence (reaching
+  95% of final by epoch 18 vs RAdam's epoch 28) through per-layer SNR-based gating.

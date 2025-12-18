@@ -1,0 +1,71 @@
+run_id: proposed-resnet20-cifar10
+method: SNARL-v1
+description: Signal-to-Noise Adaptive Learning Rate optimizer with per-layer SNR-based adaptive gating
+model:
+  name: ResNet-20
+  architecture: ResNet
+  depth: 20
+  num_classes: 10
+dataset:
+  name: CIFAR-10
+  split:
+    train: 0.9
+    val: 0.1
+  preprocessing:
+    normalization: standard_cifar10
+    augmentation: true
+    pad: 4
+    crop_size: 32
+training:
+  learning_rate: 0.1
+  batch_size: 128
+  epochs: 200
+  optimizer: SNARL
+  weight_decay: 0.0
+  gradient_clip: null
+  scheduler: cosine
+  seed: 42
+  additional_params:
+    betas: [0.9, 0.999]
+    eps: 1e-8
+    snr_beta: 1.0
+    snr_warmup_steps: 100
+evaluation:
+  primary_metric: early_convergence_speed
+  target_performance_percentage: 0.95
+  secondary_metrics:
+    - final_performance
+    - per_layer_snr_evolution
+    - training_efficiency
+    - convergence_stability
+optuna:
+  enabled: true
+  n_trials: 20
+  sampler: TPESampler
+  search_spaces:
+    - param_name: snr_beta
+      distribution_type: loguniform
+      low: 0.1
+      high: 5.0
+      choices: null
+    - param_name: snr_warmup_steps
+      distribution_type: int
+      low: 50.0
+      high: 500.0
+      choices: null
+    - param_name: learning_rate
+      distribution_type: loguniform
+      low: 0.01
+      high: 0.5
+      choices: null
+experimental_notes: |
+  SNARL (Signal-to-Noise Adaptive Learning Rate) replaces RAdam's global variance
+  rectification with per-layer SNR-based adaptive gating. Expected to achieve:
+  - 35-40% faster convergence to 95% of final performance vs RAdam
+  - Final accuracy ~92.2% ± 0.3% (matching or slightly exceeding RAdam at 92.0%)
+  - Per-layer SNR evolution showing layer-specific phase transitions
+  - Computational overhead <2% vs RAdam
+  
+  SNR computation (E[||m_t^(l)||²] / (E[||v_t^(l)|| - ||m_t^(l)||²||] + ε)) is applied
+  per layer group (early/middle/late). Adaptive gate g_t^(l) = sigmoid(β·log(SNR_t^(l)+1))
+  smoothly transitions from momentum-only (high noise, g≈0) to full adaptive (low noise, g≈1).

@@ -1,0 +1,36 @@
+
+# Main Hydra configuration file (config/config.yaml)
+defaults:
+  - override hydra/job_logging: default
+  - override hydra/hydra_logging: default
+
+# Experiment configuration
+run:
+  run_id: null  # Will be overridden via CLI
+
+results_dir: "./results"
+mode: "full"  # "full" or "trial"
+
+# Hydra settings
+hydra:
+  run:
+    dir: ${results_dir}/${run.run_id}/.hydra
+  sweep:
+    dir: ${results_dir}
+    subdir: ${run.run_id}/.hydra
+  output_subdir: .hydra
+  job:
+    chdir: false
+
+# WandB Configuration
+wandb:
+  entity: "gengaru617-personal"
+  project: "2025-11-19"
+  mode: "online"
+  tags: []
+  notes: ""
+
+# Logging Configuration
+logging:
+  level: INFO
+  format: "[%(asctime)s] %(levelname)s - %(name)s - %(message)s"
