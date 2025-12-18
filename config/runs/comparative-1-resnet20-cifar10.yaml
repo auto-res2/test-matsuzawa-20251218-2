@@ -1,5 +1,4 @@
-run:
-  run_id: comparative-1-resnet20-cifar10
+run_id: comparative-1-resnet20-cifar10
 method: RAdam-Baseline
 description: Rectified Adam baseline optimizer using global variance rectification heuristic
 model:

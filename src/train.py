@@ -996,13 +996,13 @@ def main(cfg: DictConfig) -> None:
     log.info("=" * 80)
     log.info("SNARL Training Pipeline")
     log.info("=" * 80)
-    
-    if cfg.run.run_id is None:
-        log.error("ERROR: run.run_id must be set")
+
+    if cfg.run is None:
+        log.error("ERROR: run must be set")
         sys.exit(1)
-    
+
     # Load run-specific configuration
-    run_config_path = Path("config") / "runs" / f"{cfg.run.run_id}.yaml"
+    run_config_path = Path("config") / "runs" / f"{cfg.run}.yaml"
     if not run_config_path.exists():
         log.error(f"Run config not found: {run_config_path}")
         sys.exit(1)
@@ -1022,8 +1022,8 @@ def main(cfg: DictConfig) -> None:
         log.info("Trial mode activated")
     elif mode == "full":
         cfg.wandb.mode = "online"
-    
-    log.info(f"Config: run_id={cfg.run.run_id}, method={cfg.method}, mode={mode}")
+
+    log.info(f"Config: run_id={cfg.run}, method={cfg.method}, mode={mode}")
     
     # Set seed
     set_seed(cfg.training.seed)
@@ -1044,7 +1044,7 @@ def main(cfg: DictConfig) -> None:
             wandb.init(
                 entity=cfg.wandb.entity,
                 project=cfg.wandb.project,
-                id=cfg.run.run_id,
+                id=cfg.run,
                 config=OmegaConf.to_container(cfg, resolve=True),
                 resume="allow",
                 mode=cfg.wandb.mode
@@ -1086,7 +1086,7 @@ def main(cfg: DictConfig) -> None:
             log.warning(f"WandB finish failed: {e}")
     
     # Save metrics locally
-    results_dir = Path(cfg.results_dir) / cfg.run.run_id
+    results_dir = Path(cfg.results_dir) / cfg.run
     results_dir.mkdir(parents=True, exist_ok=True)
     
     metrics_file = results_dir / "metrics.json"

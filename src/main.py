@@ -33,21 +33,21 @@ def main(cfg: DictConfig) -> None:
     """
     
     # Validate required parameters
-    if cfg.run.run_id is None:
-        log.error("ERROR: run.run_id must be specified via CLI: run={run_id}")
+    if cfg.run is None:
+        log.error("ERROR: run must be specified via CLI: run={run_id}")
         sys.exit(1)
-    
+
     if cfg.mode not in ["full", "trial"]:
         log.error(f"ERROR: mode must be 'full' or 'trial', got {cfg.mode}")
         sys.exit(1)
-    
+
     log.info(f"Starting experiment orchestrator")
-    log.info(f"  run_id: {cfg.run.run_id}")
+    log.info(f"  run_id: {cfg.run}")
     log.info(f"  mode: {cfg.mode}")
     log.info(f"  results_dir: {cfg.results_dir}")
-    
+
     # Verify run config exists
-    run_config_path = Path("config") / "runs" / f"{cfg.run.run_id}.yaml"
+    run_config_path = Path("config") / "runs" / f"{cfg.run}.yaml"
     if not run_config_path.exists():
         log.error(f"Run config not found: {run_config_path}")
         log.error(f"Available run configs should be in config/runs/ directory")
@@ -70,26 +70,26 @@ def main(cfg: DictConfig) -> None:
         log.info(f"  - wandb.mode=online")
     
     # Save configuration
-    config_output_path = results_path / f"{cfg.run.run_id}_config.yaml"
+    config_output_path = results_path / f"{cfg.run}_config.yaml"
     with open(config_output_path, "w") as f:
         OmegaConf.save(cfg, f)
     log.info(f"Configuration saved: {config_output_path}")
-    
+
     # Execute training subprocess
     try:
         log.info("Launching training subprocess (src.train)...")
-        
+
         # Prepare environment with mode setting
         env = os.environ.copy()
         env['SNARL_MODE'] = cfg.mode
         env['SNARL_BATCH_LIMIT'] = str(2 if cfg.mode == "trial" else 0)
-        
+
         cmd = [
             sys.executable,
             "-u",
             "-m",
             "src.train",
-            f"run={cfg.run.run_id}",
+            f"run={cfg.run}",
             f"results_dir={cfg.results_dir}",
             f"mode={cfg.mode}",
             f"wandb.mode={'disabled' if cfg.mode == 'trial' else 'online'}",
@@ -101,8 +101,8 @@ def main(cfg: DictConfig) -> None:
         if result.returncode != 0:
             log.error(f"Training subprocess failed with return code {result.returncode}")
             sys.exit(result.returncode)
-        
-        log.info(f"✓ Training completed successfully for run_id={cfg.run.run_id}")
+
+        log.info(f"✓ Training completed successfully for run_id={cfg.run}")
     
     except subprocess.CalledProcessError as e:
         log.error(f"Training subprocess failed: {e}")

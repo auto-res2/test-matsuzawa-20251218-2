@@ -5,8 +5,7 @@ defaults:
   - override hydra/hydra_logging: default
 
 # Experiment configuration
-run:
-  run_id: null  # Will be overridden via CLI
+run: null  # Will be overridden via CLI (e.g., run=comparative-1-resnet20-cifar10)
 
 results_dir: "./results"
 mode: "full"  # "full" or "trial"
@@ -14,10 +13,10 @@ mode: "full"  # "full" or "trial"
 # Hydra settings
 hydra:
   run:
-    dir: ${results_dir}/${run.run_id}/.hydra
+    dir: ${results_dir}/${run}/.hydra
   sweep:
     dir: ${results_dir}
-    subdir: ${run.run_id}/.hydra
+    subdir: ${run}/.hydra
   output_subdir: .hydra
   job:
     chdir: false
