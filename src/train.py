@@ -1009,8 +1009,9 @@ def main(cfg: DictConfig) -> None:
     
     log.info(f"Loading run configuration: {run_config_path}")
     run_cfg = OmegaConf.load(run_config_path)
-    
-    # Merge configurations
+
+    # Merge configurations (set struct=False to allow new keys)
+    OmegaConf.set_struct(cfg, False)
     cfg = OmegaConf.merge(cfg, run_cfg)
     
     # Apply mode-specific overrides

@@ -28,4 +28,3 @@ dependencies = [
 ]
 
 [tool.uv]
-allow-direct-imports = true
