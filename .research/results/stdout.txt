@@ -1,0 +1,45 @@
+=== [UV SYNC] Start at Thu Dec 18 09:27:29 UTC 2025 ===
+=== [UV SYNC] Finished successfully at Thu Dec 18 09:28:45 UTC 2025 ===
+=== [TRIAL RUN] Start for comparative-1-resnet20-cifar10 at Thu Dec 18 09:28:45 UTC 2025 ===
+[2025-12-18 09:28:45,965][__main__][INFO] - Starting experiment orchestrator
+[2025-12-18 09:28:45,965][__main__][INFO] -   run_id: comparative-1-resnet20-cifar10
+[2025-12-18 09:28:45,965][__main__][INFO] -   mode: trial
+[2025-12-18 09:28:45,965][__main__][INFO] -   results_dir: .research/results
+[2025-12-18 09:28:45,965][__main__][INFO] - Results directory created: .research/results
+[2025-12-18 09:28:45,965][__main__][INFO] - TRIAL MODE: Lightweight validation run
+[2025-12-18 09:28:45,965][__main__][INFO] -   - epochs=1
+[2025-12-18 09:28:45,965][__main__][INFO] -   - wandb.mode=disabled
+[2025-12-18 09:28:45,965][__main__][INFO] -   - optuna.n_trials=0
+[2025-12-18 09:28:45,965][__main__][INFO] -   - batch limit=2
+[2025-12-18 09:28:45,966][__main__][INFO] - Configuration saved: .research/results/comparative-1-resnet20-cifar10_config.yaml
+[2025-12-18 09:28:45,966][__main__][INFO] - Launching training subprocess (src.train)...
+[2025-12-18 09:28:45,966][__main__][INFO] - Command: /home/runner/work/test-matsuzawa-20251218-2/test-matsuzawa-20251218-2/.venv/bin/python3 -u -m src.train run=comparative-1-resnet20-cifar10 results_dir=.research/results mode=trial wandb.mode=disabled
+[2025-12-18 09:28:49,984][__main__][INFO] - ================================================================================
+[2025-12-18 09:28:49,984][__main__][INFO] - SNARL Training Pipeline
+[2025-12-18 09:28:49,984][__main__][INFO] - ================================================================================
+[2025-12-18 09:28:49,984][__main__][INFO] - Loading run configuration: config/runs/comparative-1-resnet20-cifar10.yaml
+[2025-12-18 09:28:49,995][__main__][INFO] - Trial mode activated
+[2025-12-18 09:28:49,995][__main__][INFO] - Config: run_id=comparative-1-resnet20-cifar10, method=RAdam-Baseline, mode=trial
+[2025-12-18 09:28:50,002][__main__][INFO] - Device: cpu
+[2025-12-18 09:28:58,738][__main__][INFO] - Loaded CIFAR-10: 45000 train, 5000 val, 10000 test
+[2025-12-18 09:28:58,739][__main__][INFO] - Data loaded: 352 train, 40 val
+[2025-12-18 09:28:58,739][__main__][INFO] - WandB disabled
+[2025-12-18 09:28:58,739][__main__][INFO] - Creating model: ResNet-20
+[2025-12-18 09:28:58,747][__main__][INFO] - ✓ Model created: 272,474 parameters
+[2025-12-18 09:28:58,747][__main__][INFO] - Starting training...
+[2025-12-18 09:28:58,748][__main__][INFO] - Created RAdam optimizer
+[2025-12-18 09:28:58,748][__main__][INFO] - Created CosineAnnealingLR scheduler (T_max=1)
+[2025-12-18 09:28:58,749][__main__][INFO] - ✓ Post-init: Model=ResNetCIFAR, Optimizer=RAdam
+[2025-12-18 09:28:58,749][__main__][INFO] - Training config: epochs=1, batch_size=128
+[2025-12-18 09:29:00,183][__main__][INFO] - Epoch 1/1: train_loss=2.3428, train_acc=12.50% | val_loss=2.3314, val_acc=10.55%
+[2025-12-18 09:29:07,421][__main__][INFO] - Test: loss=2.3334, accuracy=10.00%
+[2025-12-18 09:29:07,421][__main__][INFO] - Convergence speed: epoch 0
+[2025-12-18 09:29:07,422][__main__][INFO] - ✓ Metrics saved: .research/results/comparative-1-resnet20-cifar10/metrics.json
+[2025-12-18 09:29:07,422][__main__][INFO] - ================================================================================
+[2025-12-18 09:29:07,422][__main__][INFO] - TRAINING COMPLETE
+[2025-12-18 09:29:07,422][__main__][INFO] - Test Accuracy: 10.00%
+[2025-12-18 09:29:07,422][__main__][INFO] - Convergence Speed: epoch 0
+[2025-12-18 09:29:07,422][__main__][INFO] - ================================================================================
+[2025-12-18 09:29:08,148][__main__][INFO] - ✓ Training completed successfully for run_id=comparative-1-resnet20-cifar10
+=== [TRIAL RUN] PASSED for comparative-1-resnet20-cifar10 at Thu Dec 18 09:29:08 UTC 2025 ===
+
