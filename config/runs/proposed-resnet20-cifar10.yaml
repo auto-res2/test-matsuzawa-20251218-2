@@ -1,4 +1,5 @@
-run_id: proposed-resnet20-cifar10
+run:
+  run_id: proposed-resnet20-cifar10
 method: SNARL-v1
 description: Signal-to-Noise Adaptive Learning Rate optimizer with per-layer SNR-based adaptive gating
 model:
