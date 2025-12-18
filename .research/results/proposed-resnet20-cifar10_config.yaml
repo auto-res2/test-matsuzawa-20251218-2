@@ -1,0 +1,12 @@
+run: proposed-resnet20-cifar10
+results_dir: .research/results
+mode: trial
+wandb:
+  entity: gengaru617-personal
+  project: '2025-11-19'
+  mode: online
+  tags: []
+  notes: ''
+logging:
+  level: INFO
+  format: '[%(asctime)s] %(levelname)s - %(name)s - %(message)s'

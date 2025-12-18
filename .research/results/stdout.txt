@@ -43,3 +43,48 @@
 [2025-12-18 09:29:08,148][__main__][INFO] - ✓ Training completed successfully for run_id=comparative-1-resnet20-cifar10
 === [TRIAL RUN] PASSED for comparative-1-resnet20-cifar10 at Thu Dec 18 09:29:08 UTC 2025 ===
 
+=== [UV SYNC] Start at Thu Dec 18 09:29:36 UTC 2025 ===
+=== [UV SYNC] Finished successfully at Thu Dec 18 09:30:12 UTC 2025 ===
+=== [TRIAL RUN] Start for proposed-resnet20-cifar10 at Thu Dec 18 09:30:12 UTC 2025 ===
+[2025-12-18 09:30:13,494][__main__][INFO] - Starting experiment orchestrator
+[2025-12-18 09:30:13,495][__main__][INFO] -   run_id: proposed-resnet20-cifar10
+[2025-12-18 09:30:13,495][__main__][INFO] -   mode: trial
+[2025-12-18 09:30:13,495][__main__][INFO] -   results_dir: .research/results
+[2025-12-18 09:30:13,495][__main__][INFO] - Results directory created: .research/results
+[2025-12-18 09:30:13,495][__main__][INFO] - TRIAL MODE: Lightweight validation run
+[2025-12-18 09:30:13,495][__main__][INFO] -   - epochs=1
+[2025-12-18 09:30:13,495][__main__][INFO] -   - wandb.mode=disabled
+[2025-12-18 09:30:13,495][__main__][INFO] -   - optuna.n_trials=0
+[2025-12-18 09:30:13,495][__main__][INFO] -   - batch limit=2
+[2025-12-18 09:30:13,496][__main__][INFO] - Configuration saved: .research/results/proposed-resnet20-cifar10_config.yaml
+[2025-12-18 09:30:13,496][__main__][INFO] - Launching training subprocess (src.train)...
+[2025-12-18 09:30:13,496][__main__][INFO] - Command: /home/runner/work/test-matsuzawa-20251218-2/test-matsuzawa-20251218-2/.venv/bin/python3 -u -m src.train run=proposed-resnet20-cifar10 results_dir=.research/results mode=trial wandb.mode=disabled
+[2025-12-18 09:30:17,555][__main__][INFO] - ================================================================================
+[2025-12-18 09:30:17,555][__main__][INFO] - SNARL Training Pipeline
+[2025-12-18 09:30:17,555][__main__][INFO] - ================================================================================
+[2025-12-18 09:30:17,555][__main__][INFO] - Loading run configuration: config/runs/proposed-resnet20-cifar10.yaml
+[2025-12-18 09:30:17,565][__main__][INFO] - Trial mode activated
+[2025-12-18 09:30:17,565][__main__][INFO] - Config: run_id=proposed-resnet20-cifar10, method=SNARL-v1, mode=trial
+[2025-12-18 09:30:17,573][__main__][INFO] - Device: cpu
+[2025-12-18 09:30:25,973][__main__][INFO] - Loaded CIFAR-10: 45000 train, 5000 val, 10000 test
+[2025-12-18 09:30:25,974][__main__][INFO] - Data loaded: 352 train, 40 val
+[2025-12-18 09:30:25,974][__main__][INFO] - WandB disabled
+[2025-12-18 09:30:25,974][__main__][INFO] - Creating model: ResNet-20
+[2025-12-18 09:30:25,984][__main__][INFO] - ✓ Model created: 272,474 parameters
+[2025-12-18 09:30:25,984][__main__][INFO] - Starting training...
+[2025-12-18 09:30:25,985][__main__][INFO] - Created SNARL optimizer: snr_beta=1.0, snr_warmup_steps=100
+[2025-12-18 09:30:25,985][__main__][INFO] - Created CosineAnnealingLR scheduler (T_max=1)
+[2025-12-18 09:30:25,986][__main__][INFO] - ✓ Post-init: Model=ResNetCIFAR, Optimizer=SNARL
+[2025-12-18 09:30:25,986][__main__][INFO] - Training config: epochs=1, batch_size=128
+[2025-12-18 09:30:27,483][__main__][INFO] - Epoch 1/1: train_loss=2.3543, train_acc=12.50% | val_loss=2.3210, val_acc=10.55%
+[2025-12-18 09:30:34,773][__main__][INFO] - Test: loss=2.3191, accuracy=10.00%
+[2025-12-18 09:30:34,774][__main__][INFO] - Convergence speed: epoch 0
+[2025-12-18 09:30:34,774][__main__][INFO] - ✓ Metrics saved: .research/results/proposed-resnet20-cifar10/metrics.json
+[2025-12-18 09:30:34,775][__main__][INFO] - ================================================================================
+[2025-12-18 09:30:34,775][__main__][INFO] - TRAINING COMPLETE
+[2025-12-18 09:30:34,775][__main__][INFO] - Test Accuracy: 10.00%
+[2025-12-18 09:30:34,775][__main__][INFO] - Convergence Speed: epoch 0
+[2025-12-18 09:30:34,775][__main__][INFO] - ================================================================================
+[2025-12-18 09:30:35,704][__main__][INFO] - ✓ Training completed successfully for run_id=proposed-resnet20-cifar10
+=== [TRIAL RUN] PASSED for proposed-resnet20-cifar10 at Thu Dec 18 09:30:35 UTC 2025 ===
+
